@@ -1,0 +1,222 @@
+:root {
+  --color-bg: #f0ece2;
+  --color-card-back: #3d3d3d;
+  --color-card-front: #ffffff;
+  --color-accent: #4caf93;
+  --color-accent-glow: rgba(76, 175, 147, 0.4);
+  --color-text: #333333;
+  --color-text-light: #777777;
+  --color-star: #f5a623;
+  --color-star-empty: #cccccc;
+  --color-modal-bg: rgba(0, 0, 0, 0.6);
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --card-radius: 10px;
+  --flip-duration: 0.5s;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-md);
+}
+
+/* ---- Score Panel ---- */
+
+.game-container {
+  width: 100%;
+  max-width: 480px;
+}
+
+.score-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
+  flex-wrap: wrap;
+}
+
+.stars {
+  display: flex;
+  gap: 2px;
+}
+
+.star {
+  font-size: 1.4rem;
+  color: var(--color-star);
+  transition: color 0.3s;
+}
+
+.star.empty {
+  color: var(--color-star-empty);
+}
+
+.moves,
+.timer {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-light);
+}
+
+.btn {
+  padding: 0.4rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  background-color: var(--color-accent);
+  color: #fff;
+  transition: opacity 0.2s;
+}
+
+.btn:hover {
+  opacity: 0.85;
+}
+
+/* ---- Card Grid ---- */
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-sm);
+}
+
+.card {
+  aspect-ratio: 1;
+  perspective: 600px;
+  cursor: pointer;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform var(--flip-duration) ease;
+}
+
+/* Flip state */
+.card.flipped .card-inner,
+.card.matched .card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Shared face styles */
+.card-front,
+.card-back {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--card-radius);
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Back face — visible by default */
+.card-back {
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.06) 0%, transparent 60%),
+    var(--color-card-back);
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 2rem;
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Front face — hidden until flipped */
+.card-front {
+  background-color: var(--color-card-front);
+  transform: rotateY(180deg);
+  font-size: 2.4rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Matched accent */
+.card.matched .card-front {
+  border: 2px solid var(--color-accent);
+  box-shadow: 0 0 10px var(--color-accent-glow);
+}
+
+/* Disable pointer on matched/flipped during lock */
+.card.matched {
+  cursor: default;
+}
+
+/* ---- Win Modal ---- */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: var(--color-modal-bg);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal-overlay.visible {
+  display: flex;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 12px;
+  padding: var(--spacing-lg) 2rem;
+  text-align: center;
+  max-width: 360px;
+  width: 90%;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+.modal h2 {
+  margin-bottom: var(--spacing-sm);
+}
+
+.modal-stats {
+  margin: var(--spacing-md) 0;
+  line-height: 1.8;
+}
+
+.play-again-btn {
+  margin-top: var(--spacing-sm);
+  padding: 0.6rem 1.6rem;
+  font-size: 1rem;
+}
+
+/* ---- Responsive ---- */
+
+@media (max-width: 480px) {
+  .card-grid {
+    gap: 0.35rem;
+  }
+
+  .card-front {
+    font-size: 1.6rem;
+  }
+
+  .card-back {
+    font-size: 1.4rem;
+  }
+
+  .score-panel {
+    font-size: 0.85rem;
+  }
+}
