@@ -21,6 +21,10 @@ const movesEl = document.getElementById('moves');
 const timerEl = document.getElementById('timer');
 const starsEl = document.getElementById('stars');
 const newGameBtn = document.getElementById('new-game-btn');
+const settingsBtn = document.getElementById('settings-btn');
+const settingsPanel = document.getElementById('settings-panel');
+const bgColorPicker = document.getElementById('bg-color-picker');
+const cardBackColorPicker = document.getElementById('card-back-color-picker');
 const modalOverlay = document.getElementById('modal-overlay');
 const modalMoves = document.getElementById('modal-moves');
 const modalTime = document.getElementById('modal-time');
@@ -200,6 +204,18 @@ gridEl.addEventListener('click', (e) => {
 
 newGameBtn.addEventListener('click', initGame);
 playAgainBtn.addEventListener('click', initGame);
+
+settingsBtn.addEventListener('click', () => {
+  settingsPanel.hidden = !settingsPanel.hidden;
+});
+
+bgColorPicker.addEventListener('input', (e) => {
+  document.documentElement.style.setProperty('--color-bg', e.target.value);
+});
+
+cardBackColorPicker.addEventListener('input', (e) => {
+  document.documentElement.style.setProperty('--color-card-back', e.target.value);
+});
 
 // Start first game
 initGame();

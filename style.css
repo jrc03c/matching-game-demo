@@ -90,6 +90,46 @@ body {
   opacity: 0.85;
 }
 
+/* ---- Settings Panel ---- */
+
+.settings-btn {
+  background-color: var(--color-text-light);
+}
+
+.settings-panel {
+  background: var(--color-card-front);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: var(--spacing-sm) var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  display: flex;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.settings-panel[hidden] {
+  display: none;
+}
+
+.settings-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-light);
+}
+
+.settings-row input[type="color"] {
+  width: 36px;
+  height: 28px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 1px;
+  background: none;
+}
+
 /* ---- Card Grid ---- */
 
 .card-grid {
