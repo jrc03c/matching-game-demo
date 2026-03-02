@@ -203,6 +203,28 @@ const handleCardClick = (e) => {
   }
 };
 
+// --- Settings ---
+
+const settingsBtn = document.getElementById('settings-btn');
+const settingsPanel = document.getElementById('settings-panel');
+const colorBoardInput = document.getElementById('color-board');
+const colorCardBackInput = document.getElementById('color-card-back-input');
+
+settingsBtn.addEventListener('click', () => {
+  const isOpen = !settingsPanel.hidden;
+  settingsPanel.hidden = isOpen;
+  settingsBtn.setAttribute('aria-expanded', String(!isOpen));
+});
+
+// Update CSS variables live as the user picks a color
+colorBoardInput.addEventListener('input', (e) => {
+  document.documentElement.style.setProperty('--color-bg', e.target.value);
+});
+
+colorCardBackInput.addEventListener('input', (e) => {
+  document.documentElement.style.setProperty('--color-card-back', e.target.value);
+});
+
 // --- Init ---
 
 const initGame = () => {

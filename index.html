@@ -24,7 +24,20 @@
         <span id="timer">0:00</span>
       </div>
       <button id="new-game-btn">New Game</button>
+      <button id="settings-btn" aria-expanded="false" aria-controls="settings-panel">⚙️ Settings</button>
     </section>
+
+    <!-- Settings panel -->
+    <div id="settings-panel" class="settings-panel" hidden>
+      <div class="settings-row">
+        <label for="color-board">Board color</label>
+        <input type="color" id="color-board" value="#f0ece3">
+      </div>
+      <div class="settings-row">
+        <label for="color-card-back">Card back color</label>
+        <input type="color" id="color-card-back-input" value="#2c3e50">
+      </div>
+    </div>
 
     <div id="card-grid"></div>
   </main>
